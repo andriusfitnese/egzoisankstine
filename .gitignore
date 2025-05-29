@@ -1,0 +1,53 @@
+# Visual Studio artifacts
+.vs/
+*.suo
+*.user
+*.tlog
+ipch/
+*.aps
+*.opendb
+*.VC.db
+*.sdf
+*.NCB
+*.WRK
+*.TMP
+*.DLL
+*.EXE
+*.PDB
+*.OBJ
+*.SBR
+*.RES
+*.TLB
+*.LIB
+*.EXP
+*.BSC
+*.IDB
+*.MAP
+*.ILK
+*.res
+*.pch
+*.log
+*.psess
+*.vsp
+*.obj
+
+# Build Folders
+Debug/
+Release/
+x64/
+Win32/
+
+# Common temporary/output files
+*.bak
+*.out
+*.temp
+*.tmp
+
+# IDE specific files (if you use other IDEs)
+.idea/ # IntelliJ IDEA
+.vscode/ # VS Code (often good to ignore build artifacts, but you might want to commit settings.json)
+*.code-workspace
+
+# My project-specific outputs (add any specific output files from your project here)
+output_urls.txt
+output_word_count.txt
