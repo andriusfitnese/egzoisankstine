@@ -131,6 +131,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Makefile" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib.h" />
