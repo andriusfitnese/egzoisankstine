@@ -1,13 +1,4 @@
-﻿#include <iostream>
-#include <fstream>
-#include <unordered_map>
-#include <sstream>
-#include <string>
-#include <vector>
-#include <set>
-#include <regex>
-#include <algorithm>
-#include <windows.h>
+﻿#include "lib.h"
 
 using namespace std;
 
