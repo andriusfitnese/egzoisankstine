@@ -15,7 +15,7 @@ const string allowedLetters =
 "abcdefghijklmnopqrstuvwxyz"
 "ąčęėįšųūž";
 
-string cleanWord(const string& word) {
+string cleanWord(const string& word) { ///sutvarkom zodi, kad liktu tik leistini simboliai (be tasku, kableliu, paliekant UTF-8 simbolius)
     string result;
     bool hasLetter = false;
 
@@ -66,21 +66,20 @@ int main() {
     // skaitom teisingus TLDs (aprasytus links.txt)
     set<string> validTLDs;
     string tld;
-    while (getline(tldFile, tld)) {
+	while (getline(tldFile, tld)) {
         transform(tld.begin(), tld.end(), tld.begin(), ::tolower);
         validTLDs.insert(tld);
     }
 
-    unordered_map<string, int> wordCount;
-    unordered_map<string, set<int>> wordLines;
-    set<string> foundUrls;
-
-    regex urlRegex(R"((https?:\/\/)?(www\.)?[\w\-]+\.[\w\.\-]+)", regex::icase);
+	unordered_map<string, int> wordCount; /// saugo zodzius ir ju kiekius
+	unordered_map<string, set<int>> wordLines; /// saugo zodzius ir ju pasikartojimo eilutes
+	set<string> foundUrls;  ///laiko rastus URL adresus
+    regex urlRegex(R"((https?:\/\/)?(www\.)?[\w\-]+\.[\w\.\-]+)", regex::icase);  ///rasti imanomus url
 
     string line;
     int line_number = 0;
 
-    while (getline(input, line)) {
+	while (getline(input, line)) { /// skaitom eilutes is failo
         line_number++;
         vector<pair<size_t, size_t>> urlRanges;
 
@@ -90,7 +89,7 @@ int main() {
             size_t len = it->length();
             urlRanges.emplace_back(start, start + len);
 
-            string url = it->str();
+			string url = it->str();
             size_t protocolEnd = url.find("://");
             size_t domainStart = (protocolEnd != string::npos) ? protocolEnd + 3 : 0;
             size_t slashPos = url.find('/', domainStart);
