@@ -1,190 +1,165 @@
-﻿#include "lib.h"
-#include <iostream>
+﻿#include <iostream>
 #include <fstream>
-#include <string>
-#include <vector>
 #include <unordered_map>
 #include <sstream>
-#include <algorithm> // For std::transform
-#include <set>       // For unique line numbers and unique URLs
-#include <locale>    // For std::locale, std::tolower (locale-aware)
-#include <regex>     // For std::regex, std::sregex_iterator, std::smatch
-#include <utility>   // For std::pair (used with vector of pairs)
-#include <cctype>    // For std::ispunct (though we'll extend its usage)
-#include <cwctype>   // For wide character checks if needed, but not directly used here for char
+#include <string>
+#include <vector>
+#include <set>
+#include <regex>
+#include <algorithm>
+#include <windows.h>
 
-// For _getch() (Windows specific)
-#ifdef _WIN32
-#include <conio.h>
-#endif
+using namespace std;
 
+const string allowedLetters =
+"abcdefghijklmnopqrstuvwxyz"
+"ąčęėįšųūž";
 
-// --- Helper Functions for Word Processing (NEW/MODIFIED) ---
+string cleanWord(const string& word) {
+    string result;
+    bool hasLetter = false;
 
-// This function checks if a character is considered part of a valid word.
-// It's a pragmatic approach for UTF-8 std::string where full Unicode char-by-char
-// processing with std::iswalpha is not trivial.
-// It assumes the current locale might influence isalpha/isdigit, but prioritizes ASCII and
-// common letter ranges if it can't rely on full locale support for complex UTF-8.
-// The task emphasizes "letters".
-bool is_valid_word_char(char c, const std::locale& loc) {
-    // Check for ASCII letters and digits directly using std::isalnum
-    if (std::isalnum(c, loc)) {
-        return true;
-    }
-    // Handle specific common internal characters like hyphen or apostrophe if they
-    // should be part of a word (e.g., "co-operate", "don't").
-    // Based on the task, it seems like these should also be stripped if at ends.
-    // So, we primarily want letters and digits inside a word.
-    // For now, let's keep it simple: only alphanumeric characters are "word" chars.
-    return false;
-}
+    for (size_t i = 0; i < word.size(); ++i) {
+        unsigned char c = word[i];
 
-// Checks if a string contains at least one alphabetic character.
-// This helps filter out pure numbers or strings of only punctuation.
-bool contains_alphabetic_char(const std::string& s, const std::locale& loc) {
-    for (char c : s) {
-        if (std::isalpha(c, loc)) { // Use std::isalpha from <cctype> with locale
-            return true;
+        if ((c & 0x80) == 0) {
+            char lower = tolower(c);
+            if (allowedLetters.find(lower) != string::npos) {
+                result += lower;
+                hasLetter = true;
+            }
+        }
+        else {
+            size_t len = 1;
+            if ((c & 0xE0) == 0xC0) len = 2;
+            else if ((c & 0xF0) == 0xE0) len = 3;
+            else if ((c & 0xF8) == 0xF0) len = 4;
+
+            if (i + len <= word.size()) {
+                string utfChar = word.substr(i, len);
+                if (allowedLetters.find(utfChar) != string::npos) {
+                    result += utfChar;
+                    hasLetter = true;
+                }
+                i += len - 1;
+            }
         }
     }
-    return false;
+
+    return hasLetter ? result : "";
 }
 
-// --- Main Program ---
-int main()
-{
+int main() {
     SetConsoleOutputCP(CP_UTF8);
 
-    std::unordered_map<std::string, std::vector<int>> tekstas;
-    std::set<std::string> found_urls;
+    ifstream input("tekstas.txt");
+    ifstream tldFile("links.txt");
+    ofstream output_count("output_count.txt");
+    ofstream output_cross("cross-reference.txt");
+    ofstream output_url("output_urls.txt");
 
-    std::cout << "Iveskite failo pavadinima: ";
-    std::string failas;
-    std::cin >> failas;
-    std::ifstream fd(failas);
-    while (!fd.is_open())
-    {
-        std::cout << "Failas nerastas, iveskite dar karta: ";
-        std::cin >> failas;
-        fd.open(failas);
+    if (!input || !tldFile) {
+        cerr << "Nepavyko atidaryti tekstas.txt arba links.txt" << endl;
+        return 1;
     }
 
-    std::locale current_locale(""); // Use default locale
+    // skaitom teisingus TLDs (aprasytus links.txt)
+    set<string> validTLDs;
+    string tld;
+    while (getline(tldFile, tld)) {
+        transform(tld.begin(), tld.end(), tld.begin(), ::tolower);
+        validTLDs.insert(tld);
+    }
 
-    // Regex for URL detection (unchanged, robust)
-    std::regex url_regex(
-        R"((?:https?:\/\/)?(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*))",
-        std::regex::icase
-    );
+    unordered_map<string, int> wordCount;
+    unordered_map<string, set<int>> wordLines;
+    set<string> foundUrls;
 
-    // --- Processing Loop ---
-    std::string line;
+    regex urlRegex(R"((https?:\/\/)?(www\.)?[\w\-]+\.[\w\.\-]+)", regex::icase);
+
+    string line;
     int line_number = 0;
-    while (std::getline(fd, line))
-    {
-        ++line_number;
 
-        std::string line_for_words = line; // Copy of original line for word processing
+    while (getline(input, line)) {
+        line_number++;
+        vector<pair<size_t, size_t>> urlRanges;
 
-        // --- URL Extraction & Removal ---
-        std::sregex_iterator currentMatch(line.begin(), line.end(), url_regex);
-        std::sregex_iterator lastMatch;
-        std::vector<std::pair<size_t, size_t>> replacement_ranges;
+        // random ir laikom url + traukiam domenus
+        for (sregex_iterator it(line.begin(), line.end(), urlRegex), end; it != end; ++it) {
+            size_t start = it->position();
+            size_t len = it->length();
+            urlRanges.emplace_back(start, start + len);
 
-        while (currentMatch != lastMatch) {
-            std::smatch match = *currentMatch;
-            std::string url_str = match.str();
-            if (!url_str.empty()) {
-                found_urls.insert(url_str);
-                replacement_ranges.push_back({ match.position(), match.length() });
-            }
-            currentMatch++;
-        }
+            string url = it->str();
+            size_t protocolEnd = url.find("://");
+            size_t domainStart = (protocolEnd != string::npos) ? protocolEnd + 3 : 0;
+            size_t slashPos = url.find('/', domainStart);
+            string domain = (slashPos != string::npos) ? url.substr(domainStart, slashPos - domainStart) : url.substr(domainStart);
 
-        // Replace URLs with spaces in the copy to prevent them from being tokenized as words
-        for (auto it = replacement_ranges.rbegin(); it != replacement_ranges.rend(); ++it) {
-            line_for_words.replace(it->first, it->second, " ");
-        }
-
-        // --- Word Processing (MODIFIED) ---
-        std::istringstream iss(line_for_words);
-        std::string x;
-        while (iss >> x)
-        {
-            // --- Punctuation Removal (More robust) ---
-            // Remove leading punctuation until a valid word character is found
-            while (!x.empty() && !is_valid_word_char(x.front(), current_locale)) {
-                x.erase(x.begin());
-            }
-            // Remove trailing punctuation until a valid word character is found
-            while (!x.empty() && !is_valid_word_char(x.back(), current_locale)) {
-                x.pop_back();
-            }
-
-            // --- Lowercasing ---
-            std::transform(x.begin(), x.end(), x.begin(), [&](char c) {
-                return std::tolower(c, current_locale);
-                });
-
-            // --- Final Word Validation (NEW) ---
-            // Only add to map if the string is not empty AND contains at least one alphabetic character.
-            // This filters out pure numbers, or strings of only punctuation that might have survived.
-            if (!x.empty() && contains_alphabetic_char(x, current_locale))
-            {
-                tekstas[x].push_back(line_number);
+            size_t lastDot = domain.rfind('.');
+            if (lastDot != string::npos) {
+                string tldPart = domain.substr(lastDot + 1);
+                transform(tldPart.begin(), tldPart.end(), tldPart.begin(), ::tolower);
+                if (validTLDs.count(tldPart)) {
+                    foundUrls.insert(url);
+                }
             }
         }
-    }
-    fd.close();
 
-    // --- Output Word Count and Cross-reference (Unchanged) ---
-    std::ofstream fr("rezultatai.txt");
-    if (!fr.is_open()) {
-        std::cerr << "Nepavyko atidaryti rezultatai.txt failo rasymui!\n";
-        return 1;
-    }
-    for (const auto& p : tekstas)
-    {
-        if (p.second.size() > 1)
-        {
-            fr << p.first << " (" << p.second.size() << " kartus) eilutese: ";
-            std::set<int> unique_lines(p.second.begin(), p.second.end());
-            size_t count = 0;
-            for (int line_num : unique_lines)
-            {
-                fr << line_num;
-                if (++count < unique_lines.size())
-                    fr << ", ";
+        // istraukiam zodzius ir skaiciuojam
+        stringstream ss(line);
+        string word;
+        size_t currentPos = 0;
+
+        while (ss >> word) {
+            size_t pos = line.find(word, currentPos);
+            currentPos = pos + word.length();
+
+            bool inURL = false;
+            for (const auto& [start, end] : urlRanges) {
+                if (pos < end && (pos + word.length()) > start) {
+                    inURL = true;
+                    break;
+                }
             }
-            fr << "\n";
+            if (inURL) continue;
+
+            //aptvarkom ir skaiciuojam
+            word.erase(remove_if(word.begin(), word.end(), ::ispunct), word.end());
+            string cleaned = cleanWord(word);
+            if (!cleaned.empty() && cleaned.length() > 1) {
+                wordCount[cleaned]++;
+                wordLines[cleaned].insert(line_number);
+            }
         }
     }
-    fr.close();
 
-    // --- Output URLs (Unchanged) ---
-    std::ofstream fr2("url.txt");
-    if (!fr2.is_open()) {
-        std::cerr << "Nepavyko atidaryti url.txt failo rasymui!\n";
-        return 1;
-    }
-
-    if (found_urls.empty())
-    {
-        fr2 << "Nerasta nei viena nuoroda\n";
-    }
-    else
-    {
-        for (const auto& url : found_urls)
-        {
-            fr2 << url << "\n";
+    // spausdinam zodziu kieki (jei count > 1)
+    for (const auto& [word, count] : wordCount) {
+        if (count > 1) {
+            output_count << word << " : " << count << '\n';
         }
     }
-    fr2.close();
 
-    std::cout << "Rezultatai issaugoti 'rezultatai.txt' ir 'url.txt' failuose.\n";
-    std::cout << "Iseiti is programos paspauskite bet kuri klavisa...\n";
-    _getch();
+    // spausdinam cross-reference
+    for (const auto& [word, lines] : wordLines) {
+        if (wordCount[word] > 1) {
+            output_cross << word << " : ";
+            for (const int line : lines) {
+                output_cross << line << " ";
+            }
+            output_cross << '\n';
+        }
+    }
 
+    // spausdinam rastus URL
+    output_url << "Rasti URL adresai\n" << string(50, '-') << '\n';
+    for (const string& url : foundUrls) {
+        output_url << url << '\n';
+    }
+
+    cout << "Baigta!" << endl;
+    cout << "Iseiti is programos paspauskite bet kuri klavisa...\n";
+	cin.get();
     return 0;
 }

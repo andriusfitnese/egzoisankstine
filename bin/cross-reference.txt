@@ -1,0 +1,256 @@
+signs : 186 187 
+overseas : 186 187 
+shrinking : 180 194 
+birželio : 179 190 
+asia : 171 201 
+in : 171 179 185 
+projekto : 171 172 175 177 178 180 181 182 183 184 185 186 187 190 199 
+gruodžio : 176 187 
+vilnius : 168 170 
+laiveliai : 162 163 
+žvejybiniai : 162 163 
+dešimtmečio : 152 153 
+karynis : 150 151 
+imperijos : 148 149 150 151 
+pirmieji : 148 149 
+taraso : 148 149 
+nacionalinės : 138 
+lukoil : 138 186 187 
+dujų : 136 138 
+naftos : 136 138 
+rugsėjo : 171 181 184 
+pasirašė : 131 138 
+machine : 171 172 175 177 178 180 181 182 183 184 185 186 187 190 199 
+ligos : 116 
+druskos : 114 124 129 
+wayback : 171 172 175 177 178 180 181 182 183 184 185 186 187 190 199 
+žmonėms : 112 114 
+krizę : 116 128 
+skurdo : 116 
+and : 176 186 
+rūšių : 107 
+ežerui : 107 123 
+žuvų : 107 135 
+katastrofos : 107 116 
+pokyčiai : 105 111 
+ekosistemos : 105 107 
+tonų : 104 114 118 
+pietvakarių : 91 95 
+atgimimo : 58 73 75 102 
+mažėjimą : 43 152 153 
+nei : 58 83 
+kazakhstan : 175 201 
+jis : 70 83 
+tai : 45 53 55 78 114 123 128 
+senkant : 104 107 111 
+vandenynu : 53 
+su : 53 55 111 
+syrdarjos : 91 160 161 
+dar : 53 72 109 
+teigia : 53 128 
+amudarjos : 95 160 161 
+kad : 53 55 78 104 123 128 135 138 
+baseinai : 160 161 
+nors : 53 114 
+laivai : 148 149 
+ežeras : 39 50 75 91 95 135 
+bei : 50 107 114 116 138 
+pasaulyje : 39 67 
+nusekimo : 20 25 28 45 58 
+tik : 83 95 107 114 123 
+jungėsi : 53 55 
+syr : 32 39 67 72 109 135 
+ginklai : 99 102 
+of : 171 194 197 
+jo : 47 91 95 123 135 
+arale : 58 135 
+prie : 85 107 162 163 
+salos : 56 73 
+vis : 47 72 
+kazachų : 45 143 
+karakumų : 50 55 67 
+aralas : 41 45 50 53 55 60 67 70 78 83 85 139 170 
+pasidarė : 70 135 
+manoma : 55 78 123 
+dykumos : 50 
+skiriasi : 27 30 
+apie : 41 67 78 104 118 141 
+šaltiniuose : 27 30 
+kanalų : 62 67 123 135 
+užtvanka : 132 135 
+dabar : 27 30 85 95 107 
+pasidalino : 75 
+gylis : 25 28 91 95 
+skirtinguose : 27 30 
+metų : 43 55 62 78 128 
+visuotinė : 168 170 
+gylio : 27 30 
+koordinatės : 13 35 
+vidutinis : 25 95 
+periodo : 53 
+pavadinimas : 45 47 
+tūris : 31 41 
+km : 20 22 23 31 58 67 70 85 91 95 
+turano : 39 50 
+ilg : 13 35 
+poveikis : 112 133 
+darja : 32 
+istorija : 9 59 
+ežero : 23 27 85 109 
+tarp : 45 58 75 135 
+š : 13 35 
+jūros : 43 86 88 100 146 147 152 153 162 163 199 
+upių : 72 107 109 125 128 160 161 
+tapo : 58 75 104 111 
+pl : 13 35 
+ėmė : 39 67 
+kur : 55 85 
+padaugėjo : 135 
+aralo : 1 16 17 18 34 36 37 39 41 43 47 58 65 68 70 76 78 80 81 83 85 86 88 89 91 93 95 98 100 102 107 114 116 121 135 138 141 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 170 199 
+darjos : 39 67 72 109 135 
+korporacijos : 138 
+buvusioje : 47 102 
+lietuvių : 168 170 
+kaz : 39 91 
+laivynas : 150 151 
+xx : 39 41 67 118 
+iki : 20 25 28 39 43 45 55 58 60 70 72 98 102 107 111 114 118 128 152 153 158 159 
+straipsnis : 3 14 15 
+jūra : 1 16 17 18 34 36 37 39 53 64 89 91 93 95 141 154 155 156 157 160 161 170 
+mln : 55 114 
+tačiau : 75 128 131 
+vėliava : 19 
+uzbekija : 19 131 
+sala : 45 58 75 104 
+kazahstane : 91 95 
+įvyko : 53 55 143 
+kaip : 45 72 78 141 
+aralui : 104 111 131 
+plotas : 20 41 58 60 70 91 95 
+šiaurės : 41 75 83 95 135 
+ekologinės : 97 116 
+mėn : 17 18 
+pagal : 39 45 
+šiaurėje : 39 50 
+į : 14 55 67 75 128 135 143 
+ąjį : 39 72 
+medvilnės : 67 72 114 
+jų : 75 
+per : 45 72 111 118 128 133 
+the : 180 181 197 
+vilnamedžių : 39 126 
+nepasiekia : 67 109 
+anksčiau : 85 95 
+aralą : 45 50 75 128 141 143 
+salų : 45 58 
+on : 173 200 201 202 
+yra : 15 50 53 70 78 85 100 107 109 116 123 
+ekonominę : 116 128 
+orol : 39 45 
+sudarytas : 146 147 
+amu : 32 39 67 72 109 
+dykumoje : 55 109 
+iš : 37 45 67 72 88 104 107 116 125 135 138 171 172 175 177 178 180 181 182 183 184 185 186 187 190 199 
+nustatyti : 23 53 
+keisti : 7 8 
+maždaug : 53 55 
+daugiau : 58 123 135 
+aplink : 47 50 
+kazachijoje : 50 78 85 
+didžiausias : 28 91 95 116 
+žemumoje : 39 50 
+vos : 41 107 118 
+žemėlapis : 146 147 
+ir : 39 41 43 45 47 50 53 55 58 64 67 72 75 78 83 85 88 95 102 104 107 109 111 114 116 123 126 127 128 131 135 136 138 160 161 170 
+skalėmis : 152 153 
+ploto : 98 158 159 
+kopija : 171 172 175 177 178 180 181 182 183 184 185 186 187 190 199 
+dėl : 23 27 30 67 83 95 109 116 
+dešimtmetį : 39 41 72 
+du : 41 83 
+vandens : 41 67 70 72 75 83 88 95 107 123 125 126 135 
+dengizi : 39 45 
+emėlapis : 33 43 152 153 
+iaurės : 88 89 91 
+pusiasaliu : 58 73 75 104 
+kintančio : 27 30 
+intakų : 39 65 
+irigacinių : 62 123 135 
+jau : 64 78 135 
+arabų : 64 
+buvo : 25 28 39 45 53 55 58 67 70 72 75 78 88 91 102 104 114 118 135 141 
+vadinama : 64 95 
+paveiksle : 148 149 
+arba : 64 67 91 95 
+kitur : 27 30 
+chorezmo : 64 
+kazachijos : 39 50 135 
+rugpūčio : 17 18 
+pasiekia : 64 135 
+rugpjūčio : 138 186 
+kurių : 88 107 
+nukreipimas : 65 128 
+dešimtmetyje : 67 72 
+sovietų : 67 102 116 
+apleisti : 162 163 
+pradėjo : 67 83 
+todėl : 67 107 
+regione : 67 116 
+drėkinti : 39 67 
+vandenį : 39 114 
+vanduo : 72 85 95 109 135 
+tuo : 72 83 
+uzbekijos : 19 39 104 123 138 
+kanalai : 67 72 
+sprendimo : 119 128 
+evčenkos : 148 149 
+tarpu : 72 83 
+to : 67 83 109 202 
+metus : 67 72 111 118 133 
+nuo : 43 53 64 70 75 85 98 111 152 153 158 159 
+mažesnis : 70 127 
+druskingumas : 70 91 95 107 
+parodantis : 152 153 
+gl : 70 
+lygis : 72 83 
+cm : 72 
+išnyko : 75 107 
+published : 200 201 202 
+bendras : 58 104 
+po : 72 109 
+aral : 39 45 173 176 179 180 181 185 186 187 194 195 196 197 198 200 201 202 
+archyvuota : 171 172 175 177 178 180 181 182 183 184 185 186 187 190 199 
+kapavietė : 76 78 
+jūroje : 76 148 149 150 151 
+sekti : 39 67 
+padėtis : 79 116 
+vyriausybė : 135 138 
+uzbekijoje : 50 85 
+dugno : 78 100 114 138 
+druskingas : 39 91 95 109 135 
+upė : 91 95 
+pastačius : 83 133 
+kokaralo : 83 132 133 135 
+rusijos : 148 149 150 151 
+užtvanką : 83 133 
+enciklopedija : 168 170 
+laboratorija : 102 
+nusekus : 53 109 
+pietų : 41 75 83 95 135 
+beveik : 88 107 
+telkiniai : 41 136 
+vakarų : 88 93 95 
+kiekio : 95 126 
+ežerą : 95 135 
+sumažėjimas : 98 158 159 
+kairėje : 98 158 159 
+is : 14 15 
+dešinėje : 98 158 159 
+ant : 100 114 
+kada : 53 
+vietoje : 47 88 
+sparčiai : 39 67 
+ji : 102 128 
+vietų : 104 
+sea : 173 176 180 181 184 185 186 194 195 196 197 198 200 201 202 
+vandeniui : 109 123 
